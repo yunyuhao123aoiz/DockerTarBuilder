@@ -6,8 +6,11 @@ on:
       images:
         description: 'Docker images to build (comma-separated)'
         required: true
-        default: 'aapanel/aapanel:latest'
+        default: 'aapanel/aapanel:latest,casaos/casaos:latest'
         type: string
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # 👈 添加这一行强制使用 Node.js 24
 
 jobs:
   build:
@@ -17,7 +20,7 @@ jobs:
         platform: [linux/arm/v7]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4   # 这个警告可以暂时忽略
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
